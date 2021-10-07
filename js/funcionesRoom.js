@@ -1,26 +1,26 @@
-function traerInformacionCuarto(){
+function traerInformacionRoom(){
     $.ajax({
-        url:" https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/room/room",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/room/room",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
             $("#resultado").empty();
-            pintarRespuestaCuarto(respuesta.items);
+            pintarRespuestaRoom(respuesta.items);
         }
         });
 
 }
 
 
-function pintarRespuestaCuarto(items){
+function pintarRespuestaRoom(items){
 
     let mytable="<table>";
-    mytable+="<td>"+" ID "+"</td>";
-    mytable+="<td>"+" ROOM "+"</td>";
-    mytable+="<td>"+" STARS"+"</td>";
-    mytable+="<td>"+" Category "+"</td>";
-    mytable+="<td>"+" Description "+"</td>";
+    mytable+="<td>"+"id"+"</td>";
+    mytable+="<td>"+"room"+"</td>";
+    mytable+="<td>"+"stars"+"</td>";
+    mytable+="<td>"+"Category_id"+"</td>";
+    mytable+="<td>"+"Description"+"</td>";
     for(i=0;i<items.length;i++){
         mytable+="<tr>";
         mytable+="<td>"+items[i].id+"</td>";
@@ -28,7 +28,7 @@ function pintarRespuestaCuarto(items){
         mytable+="<td>"+items[i].stars+"</td>";
         mytable+="<td>"+items[i].category_id+"</td>";
         mytable+="<td>"+items[i].description+"</td>";
-        mytable+="<td> <button onclick='eliminarCuarto("+items[i].id+")'>Borrar</button></td>";
+        mytable+="<td> <button onclick='borrarElementoRoom("+items[i].id+")'>Borrar</button></td>";
         mytable+="</tr>";
     }
     mytable+="</table>";
@@ -36,7 +36,7 @@ function pintarRespuestaCuarto(items){
 
 }
 
-function guardarInformacionCuarto(){
+function guardarInformacionRoom(){
     let myData={
         id:$("#id").val(),
         room:$("#room").val(),
@@ -47,7 +47,7 @@ function guardarInformacionCuarto(){
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:" https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/room/room",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/room/room",
         type:"POST",
         data:myData,
         datatype:"JSON",
@@ -58,13 +58,13 @@ function guardarInformacionCuarto(){
             $("#stars").val("");
             $("#category_id").val("");
             $("#description").val("");
-            traerInformacionCuarto();
-            alert("Se ha guardado el cuarto exitosamente!")
+            traerInformacionRoom();
+            alert("se ha guardado la")
         }
         });
 }
 
-function editarCuarto(){
+function editarInformacionRoom(){
     let myData={
         id:$("#id").val(),
         room:$("#room").val(),
@@ -75,7 +75,7 @@ function editarCuarto(){
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:" https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/room/room",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/room/room",
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -87,28 +87,28 @@ function editarCuarto(){
             $("#stars").val("");
             $("#category_id").val("");
             $("#description").val("");
-            traerInformacionCuarto();
-            alert("Se ha actualizado el cuarto exitosamente!")
+            traerInformacionRoom();
+            alert("Se ha actualizado la informacion")
         }
         });
 }
 
-function eliminarCuarto(idElemento){
+function borrarElementoRoom(idElemento){
     let myData={
         id:idElemento
     };
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:" https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/room/room",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/room/room",
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",
         datatype:"JSON",
         success:function(respuesta){
             $("#resultado").empty();
-            traerInformacionCuarto();
-            alert("Se ha eliminado el cuarto exitosamente!")
+            traerInformacionRoom();
+            alert("Se ha eliminado la informacion")
         }
         });
 }

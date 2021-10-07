@@ -1,28 +1,28 @@
-function traerInformacionMensaje(){
+function traerInformacionMessage(){
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/message/message",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
             $("#resultado").empty();
-            pintarRespuestaMensaje(respuesta.items);
+            pintarRespuestaMessage(respuesta.items);
         }
         });
 
 }
 
 
-function pintarRespuestaMensaje(items){
+function pintarRespuestaMessage(items){
 
     let mytable="<table>";
-    mytable+="<td>"+" ID "+"</td>"
-    mytable+="<td>"+" MESSAGE TEXT "+"</td>"
+    mytable+="<td>"+"id"+"</td>"
+    mytable+="<td>"+"messagetext"+"</td>"
     for(i=0;i<items.length;i++){
         mytable+="<tr>";
         mytable+="<td>"+items[i].id+"</td>";
         mytable+="<td>"+items[i].messagetext+"</td>";
-        mytable+="<td> <button onclick='eliminarMensaje("+items[i].id+")'>Borrar</button></td>";
+        mytable+="<td> <button onclick='borrarElementoMessage("+items[i].id+")'>Borrar</button></td>";
         mytable+="</tr>";
     }
     mytable+="</table>";
@@ -30,7 +30,7 @@ function pintarRespuestaMensaje(items){
 
 }
 
-function guardarInformacionMensaje(){
+function guardarInformacionMessage(){
     let myData={
         id:$("#id").val(),
         messagetext:$("#messagetext").val(),
@@ -38,7 +38,7 @@ function guardarInformacionMensaje(){
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/message/message",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message",
         type:"POST",
         data:myData,
         datatype:"JSON",
@@ -46,13 +46,13 @@ function guardarInformacionMensaje(){
             $("#resultado").empty();
             $("#id").val("");
             $("#messagetext").val("");
-            traerInformacionMensaje();
-            alert("Se ha guardado el mensaje exitosamente!")
+            traerInformacionMessage();
+            alert("Se ha guardado la información")
         }
         });
 }
 
-function editarMensaje(){
+function editarInformacionMessage(){
     let myData={
         id:$("#id").val(),
         messagetext:$("#messagetext").val(),
@@ -60,7 +60,7 @@ function editarMensaje(){
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/message/message",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message",
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -69,28 +69,28 @@ function editarMensaje(){
             $("#resultado").empty();
             $("#id").val("");
             $("#messagetext").val("");
-            traerInformacionMensaje();
-            alert("Se ha actualizado el mensaje exitosamente!")
+            traerInformacionMessage();
+            alert("Se ha actualizado la informacion")
         }
         });
 }
 
-function eliminarMensaje(idElemento){
+function borrarElementoMessage(idElemento){
     let myData={
         id:idElemento
     };
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/message/message",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/message/message",
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",
         datatype:"JSON",
         success:function(respuesta){
             $("#resultado").empty();
-            traerInformacionMensaje();
-            alert("Se ha eliminado el cuarto exitosamente!")
+            traerInformacionMessage();
+            alert("Se ha eliminado la informacion")
         }
         });
 }

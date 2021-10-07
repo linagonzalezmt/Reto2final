@@ -1,32 +1,32 @@
-function traerInformacionCliente(){
+function traerInformacionClient(){
     $.ajax({
-        url:" https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/client/client",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
         type:"GET",
         datatype:"JSON",
         success:function(respuesta){
             console.log(respuesta);
             $("#resultado").empty();
-            pintarRespuestaCliente(respuesta.items);
+            pintarRespuestaClient(respuesta.items);
         }
         });
 
 }
 
 
-function pintarRespuestaCliente(items){
+function pintarRespuestaClient(items){
 
     let mytable="<table>";
-    mytable+="<td>"+" ID "+"</td>";
-    mytable+="<td>"+" NAME "+"</td>";
-    mytable+="<td>"+" EMAIL"+"</td>";
-    mytable+="<td>"+" AGE "+"</td>";
+    mytable+="<td>"+"id"+"</td>";
+    mytable+="<td>"+"name"+"</td>";
+    mytable+="<td>"+"email"+"</td>";
+    mytable+="<td>"+"age"+"</td>";
     for(i=0;i<items.length;i++){
         mytable+="<tr>";
         mytable+="<td>"+items[i].id+"</td>";
         mytable+="<td>"+items[i].name+"</td>";
         mytable+="<td>"+items[i].email+"</td>";
         mytable+="<td>"+items[i].age+"</td>";
-        mytable+="<td> <button onclick='eliminarCliente("+items[i].id+")'>Borrar</button></td>";
+        mytable+="<td> <button onclick='borrarElementoClient("+items[i].id+")'>Borrar</button></td>";
         mytable+="</tr>";
     }
     mytable+="</table>";
@@ -34,7 +34,7 @@ function pintarRespuestaCliente(items){
 
 }
 
-function guardarInformacionCliente(){
+function guardarInformacionClient(){
     let myData={
         id:$("#id").val(),
         name:$("#name").val(),
@@ -44,7 +44,7 @@ function guardarInformacionCliente(){
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/client/client",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
         type:"POST",
         data:myData,
         datatype:"JSON",
@@ -54,13 +54,13 @@ function guardarInformacionCliente(){
             $("#name").val("");
             $("#email").val("");
             $("#age").val("");
-            traerInformacionCliente();
-            alert("Se ha guardado el cliente exitosamente!")
+            traerInformacionClient();
+            alert("Se ha guardado la información")
         }
         });
 }
 
-function editarCliente(){
+function editarInformacionClient(){
     let myData={
         id:$("#id").val(),
         name:$("#name").val(),
@@ -70,7 +70,7 @@ function editarCliente(){
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/client/client",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
         type:"PUT",
         data:dataToSend,
         contentType:"application/JSON",
@@ -81,28 +81,28 @@ function editarCliente(){
             $("#name").val("");
             $("#email").val("");
             $("#age").val("");
-            traerInformacionCliente();
-            alert("Se ha actualizado el cliente exitosamente!")
+            traerInformacionClient();
+            alert("Se ha actualizado la informacion")
         }
         });
 }
 
-function eliminarCliente(idElemento){
+function borrarElementoClient(idElemento){
     let myData={
         id:idElemento
     };
 
     let dataToSend=JSON.stringify(myData);
     $.ajax({
-        url:"https://g92c8d59813b029-oraclebd1.adb.us-ashburn-1.oraclecloudapps.com/ords/admin/client/client",
+        url:"https://gb90df9e48e3fb8-db202109250852.adb.us-sanjose-1.oraclecloudapps.com/ords/admin/client/client",
         type:"DELETE",
         data:dataToSend,
         contentType:"application/JSON",
         datatype:"JSON",
         success:function(respuesta){
             $("#resultado").empty();
-            traerInformacionCliente();
-            alert("Se ha eliminado el cliente exitosamente!")
+            traerInformacionClient();
+            alert("Se ha eliminado la informacion")
         }
         });
 }
